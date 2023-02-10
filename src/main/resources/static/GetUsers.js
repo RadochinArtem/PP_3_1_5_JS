@@ -28,7 +28,7 @@ async function getUsers() {
             <td>${email}</td>
             <td>${userRoles}</td>
             <td>
-                <button type="button" class="btn btn-info text-white" data-bs-userId=${id}
+                <button type="button" class="btn btn-primary text-white" data-bs-userId=${id}
                     data-bs-userFirstName=${firstName} data-bs-userLastName=${lastName} data-bs-userAge=${age}
                     data-bs-userEmail=${email} data-bs-toggle="modal"
                     data-bs-target="#ModalEdit">Edit</button>
