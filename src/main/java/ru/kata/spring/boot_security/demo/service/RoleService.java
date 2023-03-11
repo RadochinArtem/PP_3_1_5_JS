@@ -8,5 +8,4 @@ import java.util.List;
 public interface RoleService {
     List<Role> findAllRoles();
 
-    List<? extends GrantedAuthority> mapRolesToAuthorities(List<Role> roles);
 }

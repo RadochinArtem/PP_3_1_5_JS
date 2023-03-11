@@ -25,10 +25,8 @@
 
 <nav class="navbar navbar-dark bg-dark">
     <span class="navbar-brand mb-0">
-         <span style="font-weight: bold" th:utext="${current_user.getEmail()}"></span> with roles:
-            <span th:each="role : ${current_user.getRoles()}">
-                <span th:utext="${role.getStringRole()}">...</span>
-            </span>
+         <span style="font-weight: bold" id="navbar.email"></span> with roles:
+            <span id="navbar.roles" ></span>
     </span>
     <ul class="navbar-nav px-4">
         <div class="nav-item text-nowrap">
@@ -273,6 +271,8 @@
 <script type="text/javascript" th:src="@{DeleteUser.js}"></script>
 <script type="text/javascript" th:src="@{addForm.js}"></script>
 <script type="text/javascript" th:src="@{GetUsers.js}"></script>
+<script type="text/javascript" th:src="@{InitAdminPage.js}"></script>
+
 <script>
     getUsers();
 </script>

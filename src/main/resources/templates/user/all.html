@@ -10,18 +10,21 @@
 <div class="container-fluid">
   <div class="row bg-dark align-items-center">
     <div class="col-11">
-                    <span class="nav navbar-text text-white fs-4">
-                        <strong><th:block th:text="${logUser.getEmail()}"></th:block></strong>
-                        &nbsp;<nobr>with roles:</nobr>
-                        &nbsp;<th:block th:each="role : ${logUser.getRoles()}" th:text="${role.getStringRole()} + ' '"></th:block>
-                    </span>
+      <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0">
+         <span style="font-weight: bold" id="navbar.email"></span> with roles:
+            <span id="navbar.roles" ></span>
+    </span>
+        <ul class="navbar-nav px-4">
+          <div class="nav-item text-nowrap">
+            <a class="nav-link" href="/login">Logout</a>
+          </div>
+        </ul>
+      </nav>
     </div>
     <div class="col-1">
       <ul class="nav navbar-nav float-end">
         <li class="nav-item">
-          <form th:action="@{/logout}" th:method="post">
-            <input type="submit" value="Logout" class="bg-dark form-control-plaintext text-white-50 h5">
-          </form>
         </li>
       </ul>
     </div>
@@ -60,13 +63,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="user : ${logUser}">
-                  <td th:text="${logUser.getId()}"></td>
-                  <td th:text="${logUser.getFirstName()}"></td>
-                  <td th:text="${logUser.getLastName()}"></td>
-                  <td th:text="${logUser.getAge()}"></td>
-                  <td th:text="${logUser.getEmail()}"></td>
-                  <td th:text="${logUser.getRolesString()}"></td>
+                <tr>
+                  <td id="id"></td>
+                  <td id="firstname"></td>
+                  <td id="lastname"></td>
+                  <td id="age"></td>
+                  <td id="email"></td>
+                  <td id="roles"></td>
                 </tr>
                 </tbody>
               </table>
@@ -78,5 +81,6 @@
     </div>
   </div>
 </div>
+<script type="text/javascript" th:src="@{InitUserPage.js}"></script>
 </body>
 </html>

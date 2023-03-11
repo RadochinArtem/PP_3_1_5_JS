@@ -24,9 +24,4 @@ public class RoleServiceImpl implements RoleService{
     public List<Role> findAllRoles() {
         return roleRepository.findAll();
     }
-
-    @Override
-    public List<? extends GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-    }
 }

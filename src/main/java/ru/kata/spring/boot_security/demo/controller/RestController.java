@@ -4,25 +4,37 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
-@RestController
+@org.springframework.web.bind.annotation.RestController
 @RequestMapping("/rest")
-public class AdminRestController {
+public class RestController {
 
     private final UserService userService;
     private final RoleService roleService;
 
-    public AdminRestController(UserService userService, RoleService roleService) {
+    public RestController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
 
+
+    @GetMapping("/admin")
+    public String index(Principal principal) {
+        ModelAndView model = new ModelAndView("admin/all");
+        model.addObject("current_user", userService.findUserByEmail(principal.getName()));
+        model.addObject("users", userService.findAllUsers());
+        model.addObject("rolesList", roleService.findAllRoles());
+        model.addObject("newUser", new User());
+        return "admin/all";
+    }
     @GetMapping("/users")
     public ResponseEntity<List<User>> showAllUsers() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
@@ -59,5 +71,7 @@ public class AdminRestController {
     public ResponseEntity<List<Role>> getListRoles(){
         return new ResponseEntity<>(roleService.findAllRoles(),HttpStatus.OK);
     }
+
+
 
 }
