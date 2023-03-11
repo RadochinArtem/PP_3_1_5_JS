@@ -21,7 +21,7 @@ formEdit.addEventListener('submit', e => {
             object[key] = value;
         }
     });
-    fetch("rest/users/"+formData.get("id"), {
+    fetch("admin/users/"+formData.get("id"), {
         method: "PUT",
         headers: {
             "Content-type": "application/json"

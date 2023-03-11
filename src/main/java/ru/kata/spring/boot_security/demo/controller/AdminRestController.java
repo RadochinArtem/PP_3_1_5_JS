@@ -14,27 +14,17 @@ import java.security.Principal;
 import java.util.List;
 
 @org.springframework.web.bind.annotation.RestController
-@RequestMapping("/rest")
-public class RestController {
+@RequestMapping("/admin")
+public class AdminRestController {
 
     private final UserService userService;
     private final RoleService roleService;
 
-    public RestController(UserService userService, RoleService roleService) {
+    public AdminRestController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
 
-
-    @GetMapping("/admin")
-    public String index(Principal principal) {
-        ModelAndView model = new ModelAndView("admin/all");
-        model.addObject("current_user", userService.findUserByEmail(principal.getName()));
-        model.addObject("users", userService.findAllUsers());
-        model.addObject("rolesList", roleService.findAllRoles());
-        model.addObject("newUser", new User());
-        return "admin/all";
-    }
     @GetMapping("/users")
     public ResponseEntity<List<User>> showAllUsers() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);

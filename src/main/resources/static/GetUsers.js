@@ -1,7 +1,7 @@
 async function getUsers() {
 
 
-    const response = await fetch("rest/users");
+    const response = await fetch("admin/users");
 
     if (response.ok) {
         let json = await response.json()
