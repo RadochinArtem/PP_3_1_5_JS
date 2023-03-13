@@ -16,25 +16,20 @@ import java.util.List;
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/admin")
 public class AdminRestController {
-
     private final UserService userService;
     private final RoleService roleService;
-
     public AdminRestController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
-
     @GetMapping("/users")
     public ResponseEntity<List<User>> showAllUsers() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
     }
-
     @GetMapping("/users/{id}")
     public ResponseEntity<User> showUserById(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(userService.findUserById(id),HttpStatus.OK);
     }
-
     @PostMapping("/users")
     public ResponseEntity<User> addNewUser(@RequestBody User user) {
         userService.saveUser(user);
@@ -45,23 +40,17 @@ public class AdminRestController {
         userService.updateUser(user,id);
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
-
     @DeleteMapping("/users/{id}")
     public ResponseEntity<Long> deleteUser (@PathVariable(name = "id") Long id) {
         userService.deleteUserById(id);
         return new ResponseEntity<>(id,HttpStatus.OK);
     }
-
     @GetMapping("/users/current_user")
     public ResponseEntity<User> showCurrentUser(@AuthenticationPrincipal User user) {
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
-
     @GetMapping("/roles")
     public ResponseEntity<List<Role>> getListRoles(){
         return new ResponseEntity<>(roleService.findAllRoles(),HttpStatus.OK);
     }
-
-
-
 }
